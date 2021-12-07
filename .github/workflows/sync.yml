@@ -1,0 +1,36 @@
+name: Generate cheats.rs static files
+
+on:
+  push:
+  schedule:
+    - cron: '0 2 * * *'
+
+env:
+  REPO_URL: https://github.com/ralfbiedert/cheats.rs
+  REPO_BRANCH: master
+  MY_SECRET: ${{secrets.commit_secret}}
+
+jobs:
+  runner:
+    name: 'Generate cheats.rs static files'
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout code
+        uses: actions/checkout@v2
+        
+      - name: Initialization environment
+        run: |
+          wget -q -O - "https://github.com/getzola/zola/releases/download/v0.15.0/zola-v0.15.0-x86_64-unknown-linux-gnu.tar.gz" | tar xzf zola-v0.15.0-x86_64-unknown-linux-gnu.tar.gz -C /usr/local/bin
+          rm zola-v0.15.0-x86_64-unknown-linux-gnu.tar.gz
+          sudo mkdir -p /workdir
+          sudo chown $USER:$GROUPS /workdir
+        
+      - name: Clone source code
+        working-directory: /workdir
+        run: |
+          git clone $REPO_URL -b $REPO_BRANCH cheats.rs
+          ln -sf /workdir/cheats.rs $GITHUB_WORKSPACE/cheats.rs
+          
+      - name: build static
+        run: cd cheats.rs && zola build && ls -alh ./public/
+
