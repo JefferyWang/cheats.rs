@@ -9,6 +9,7 @@ env:
   REPO_URL: https://github.com/ralfbiedert/cheats.rs
   REPO_BRANCH: master
   MY_SECRET: ${{secrets.commit_secret}}
+  RUST_BACKTRACE: 1
 
 jobs:
   runner:
