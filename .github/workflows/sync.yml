@@ -7,7 +7,7 @@ on:
 
 env:
   REPO_URL: https://github.com/ralfbiedert/cheats.rs
-  REPO_BRANCH: latest-release
+  REPO_BRANCH: master
   RUST_BACKTRACE: 1
 
 jobs:
@@ -20,7 +20,7 @@ jobs:
         
       - name: Initialization environment
         run: |
-          wget -q -O - "https://github.com/getzola/zola/releases/download/v0.15.0/zola-v0.15.0-x86_64-unknown-linux-gnu.tar.gz" | tar xzf - -C /usr/local/bin
+          wget -q -O - "https://github.com/getzola/zola/releases/download/v0.14.1/zola-v0.14.1-x86_64-unknown-linux-gnu.tar.gz" | tar xzf - -C /usr/local/bin
           sudo mkdir -p /workdir
           sudo chown $USER:$GROUPS /workdir
         
