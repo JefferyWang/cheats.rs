@@ -7,7 +7,7 @@ on:
 
 env:
   REPO_URL: https://github.com/ralfbiedert/cheats.rs
-  REPO_BRANCH: latest-release
+  REPO_BRANCH: master
   RUST_BACKTRACE: 1
 
 jobs:
