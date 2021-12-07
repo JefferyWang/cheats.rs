@@ -31,7 +31,7 @@ jobs:
           ln -sf /workdir/cheats.rs $GITHUB_WORKSPACE/cheats.rs
           
       - name: build static
-        run: cd cheats.rs && zola -c "config.toml" build && ls -alh ./public/
+        run: cd cheats.rs && zola -c "config.toml" --base-url "https://techlivewang.gitee.io/cheats.rs" build && ls -alh ./public/
         
       - name: Deploy to GitHub Pages
         if: success()
