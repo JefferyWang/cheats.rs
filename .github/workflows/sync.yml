@@ -8,7 +8,6 @@ on:
 env:
   REPO_URL: https://github.com/ralfbiedert/cheats.rs
   REPO_BRANCH: latest-release
-  MY_SECRET: ${{secrets.commit_secret}}
   RUST_BACKTRACE: 1
 
 jobs:
@@ -33,4 +32,13 @@ jobs:
           
       - name: build static
         run: cd cheats.rs && zola -c "config.toml" build && ls -alh ./public/
+        
+      - name: Deploy to GitHub Pages
+        if: success()
+        uses: crazy-max/ghaction-github-pages@v2
+        with:
+          target_branch: gh-pages
+          build_dir: cheats.rs/public
+        env:
+          GITHUB_TOKEN: ${{ secrets.COMMIT_SECRET }}
 
