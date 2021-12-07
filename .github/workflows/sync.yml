@@ -32,5 +32,5 @@ jobs:
           ln -sf /workdir/cheats.rs $GITHUB_WORKSPACE/cheats.rs
           
       - name: build static
-        run: cd cheats.rs && zola build && ls -alh ./public/
+        run: cd cheats.rs && zola -c "config.toml" build && ls -alh ./public/
 
